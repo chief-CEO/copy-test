@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scalogy API — Scalogy</title>
+<meta name="description" content="Public API for scalogy.com: submit a lead with POST /api/contact, ask the site assistant with POST /api/chat, and check availability with GET /api/health.">
+<link rel="canonical" href="https://scalogy.com/api-docs">
+<link rel="icon" href="images/98255ff23bd022ff.webp" type="image/webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Pixelify+Sans:wght@400;500;600;700&family=Press+Start+2P&family=Share+Tech+Mono&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="page-api-docs">
+<header class="site-header">
+  <nav class="nav" aria-label="Main">
+    <div class="nav-left"><a class="brand" href="index.html"><img src="images/98255ff23bd022ff.webp" alt="Scalogy mascot" width="28" height="28"><span>SCALOGY</span></a><a class="nav-phone" href="tel:+19128752822">📞 (912) 875-2822</a></div>
+    <div class="nav-links" id="nav-links"><a href="compare.html">COMPARE</a><a href="blog.html">INSIGHTS</a><a href="https://scalogy.com/industries">INDUSTRIES</a><a href="https://scalogy.com/resources">RESOURCES</a><div class="nav-products"><span>PRODUCTS ▾</span></div><a class="btn-book" href="contact.html">▶ BOOK CALL</a></div>
+    <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">☰</button>
+  </nav>
+</header>
+<main class="dark-main">
+<section class="api"><div class="wrap">
+<div class="api-kicker">DEVELOPERS</div>
+<h1 class="arcade">SCALOGY PUBLIC API</h1><p>Three endpoints, no API key. Everything is served from <code>https://scalogy.com</code> as JSON. The machine-readable description is an OpenAPI 3.1 document at <a href="https://scalogy.com/openapi.json">/openapi.json</a>, and the catalog for automated discovery (RFC 9727) is at <a href="https://scalogy.com/.well-known/api-catalog">/.well-known/api-catalog</a>.</p><h2>POST /api/contact</h2><p>Submit a contact request. It becomes a lead and the Scalogy team replies by email, usually within one business day. Only <code>name</code> and <code>email</code> are required. Optional fields: <code>businessName</code>, <code>industry</code>,<code>timeWaster</code> (the problem to automate, in your words), <code>source</code>, and <code>utm_source</code>,<code>utm_medium</code>, <code>utm_campaign</code>.</p><pre>curl -X POST https://scalogy.com/api/contact \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Jordan Rivera","email":"jordan@example.com","businessName":"Rivera Plumbing","industry":"Plumbing","timeWaster":"Missed calls after hours","source":"api"}'
+
+200 {"ok":true,"id":"3f1c8e6a-2b7d-4c1e-9d3f-5a6b7c8d9e0f"}
+400 {"error":"Name and email are required"}</pre><h2>POST /api/chat</h2><p>Ask the site assistant about Scalogy's AI agents, pricing or process. Send the conversation so far as <code>messages</code>(roles <code>user</code> and <code>assistant</code>, oldest first) and receive the next <code>reply</code>. An empty array returns the greeting.</p><pre>curl -X POST https://scalogy.com/api/chat \
+  -H "Content-Type: application/json" \
+  -d '{"messages":[{"role":"user","content":"What does the lead response agent do?"}]}'
+
+200 {"reply":"It answers every new inquiry within a minute, by text or email, and books the call."}
+502 {"error":"AI service error"}</pre><h2>GET /api/health</h2><p>Returns 200 when the site and its API are serving requests. Use it as the status link for monitoring.</p><pre>curl https://scalogy.com/api/health
+
+200 {"status":"ok","service":"scalogy.com","time":"2026-09-22T17:00:00.000Z"}</pre><h2>DISCOVERY</h2><p>Every HTML page carries a <code>Link</code> header with <code>rel="api-catalog"</code>, and the catalog links to the spec (<code>service-desc</code>), this page (<code>service-doc</code>) and the health endpoint (<code>status</code>). The site also publishes <a href="https://scalogy.com/llms.txt">/llms.txt</a> and returns Markdown for any page requested with <code>Accept: text/markdown</code>.</p><p>Questions or a use case that needs more than this? <a href="contact.html">Get in touch</a>.</p>
+</div></section>
+</main>
+<footer class="site-footer">
+  <a class="foot-brand" href="index.html">SCALOGY</a>
+  <div class="foot-tag">AI RUNNERS FOR SMALL BUSINESSES</div>
+  <hr class="foot-rule">
+  <div class="foot-nav"><a href="index.html">▶ HOME</a><a href="about.html">▶ ABOUT</a><a href="https://scalogy.com/services">▶ SERVICES</a><a href="https://scalogy.com/case-studies">▶ CASE STUDIES</a><a href="blog.html">▶ BLOG</a><a href="contact.html">▶ CONTACT</a></div>
+  <a class="foot-phone" href="tel:+19128752822">📞 (912) 875-2822</a>
+  <address class="foot-address">Scalogy<br>Fayetteville, GA<br>Serving the Atlanta metro and clients nationwide<br><a href="https://scalogy.com/service-area/atlanta">Atlanta-metro service areas</a></address>
+  <div class="foot-copy">© 2026 SCALOGY — ALL RIGHTS RESERVED</div>
+  <div class="foot-legal"><a href="https://scalogy.com/industries">Industries</a><a href="https://scalogy.com/guest-article-exchange">Guest Article Exchange</a><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Service</a></div>
+</footer>
+<a class="chat-btn" href="https://scalogy.com/api-docs" aria-label="Talk to Scout"><img src="images/db33987d724f92c5.webp" alt="Chat" width="30" height="30"></a>
+<script src="menu.js" defer></script>
+</body>
+</html>
