@@ -1,0 +1,12 @@
+Copy of scalogy.com, made by Scalogy's Copy my website tool on 2026-11-06.
+It holds the first 10 of the 100 pages we found.
+
+What to do with it:
+
+1. Open this repository in your AI agent: Claude Code on the web (claude.ai/code), or Codex in ChatGPT (chatgpt.com/codex).
+2. Type: Follow the instructions in site-copy/COPY-PROMPT.md.
+
+Your agent rebuilds the site in this repository and publishes it free on GitHub Pages. Your current website is not changed.
+Scalogy removed its access to this repository right after adding these files.
+
+Course and tool: https://scalogy.com/copy-my-website
